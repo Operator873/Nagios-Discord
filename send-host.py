@@ -4,7 +4,7 @@ import sys
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 HOOK = "https://discordapp.com/api/webhooks/id/token"
-KEYS = ['type', 'servdesc', 'host', 'hostaddr', 'servstate', 'time', 'output']
+KEYS = ['type', 'hostname', 'hoststate', 'hostaddr', 'output', 'time']
 DOMAIN = "your.website.com"
 
 def codecolor(type):
@@ -23,14 +23,13 @@ def main(nagIn):
     cmd = nagIn.pop(0)
     data = {KEYS[i]: nagIn[i] for i in range(len(KEYS))}
 
-    link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host'] + "&service=" + data['servdesc']
+    link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host']
 
-    line1 = "**<" + data['type'] + ">** " + data['host'] + " - " + data['servdesc'] + ": " + data['servstate']
-    line2 = data['hostaddr'] + " " + data['output']
+    line1 = "**<" + data['type'] + ">** " + data['hostname'] + "(" + host['hostaddr'] + ")  is " + data['hoststate']
 
     webhook = DiscordWebhook(url=HOOK)
     # create embed object for webhook
-    embed = DiscordEmbed(title=line1, description=line2, color=codecolor(data['type']))
+    embed = DiscordEmbed(title=line1, description=data['output'], color=codecolor(data['type']))
     embed.set_author(name='Open Nagios service detail', url=link)
 
     # set timestamp
