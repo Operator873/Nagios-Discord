@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
@@ -28,13 +30,14 @@ def main(nagIn):
     # create embed object for webhook
     embed = DiscordEmbed(title=line1, description=line2, color=codecolor(data['type']))
 
-    # add fields to embed
-    embed.add_embed_field(name='Timestamp', value=data['date'])
+    # set timestamp
+    embed.set_timestamp(int(data['date']))
 
     # add embed object to webhook
     webhook.add_embed(embed)
 
     res = webhook.execute()
-    # print(res) ## For debugging
+    #with open("/home/hades/discordLog", "a") as f:
+    #    f.write(str(res))
 
 main(sys.argv)
