@@ -7,21 +7,23 @@ HOOK = "https://discordapp.com/api/webhooks/id/token"
 KEYS = ['type', 'hostname', 'hoststate', 'hostaddr', 'output', 'time']
 DOMAIN = "your.website.com"
 
-def codecolor(type):
+
+def codecolor(alerttype):
     clr_red = 13632027
     clr_yel = 16098851
     clr_grn = 8311585
 
-    if type == 'PROBLEM':
+    if alerttype == 'PROBLEM':
         return clr_red
-    elif type == 'RECOVERY':
+    elif alerttype == 'RECOVERY':
         return clr_grn
     else:
         return clr_yel
 
-def main(nagIn):
-    cmd = nagIn.pop(0)
-    data = {KEYS[i]: nagIn[i] for i in range(len(KEYS))}
+
+def main(nag_in):
+    cmd = nag_in.pop(0)
+    data = {KEYS[i]: nag_in[i] for i in range(len(KEYS))}
 
     link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host']
 
@@ -39,5 +41,6 @@ def main(nagIn):
     webhook.add_embed(embed)
 
     res = webhook.execute()
+
 
 main(sys.argv)
