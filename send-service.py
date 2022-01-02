@@ -41,7 +41,5 @@ def main(nagIn):
     webhook.add_embed(embed)
 
     res = webhook.execute()
-    #with open("/home/hades/discordLog", "a") as f:
-    #    f.write(str(res))
 
 main(sys.argv)
