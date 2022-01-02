@@ -12,12 +12,12 @@ Now we need to create the Nagios commands to call these scripts. These should pr
 ```
 define command {
   command_name notify-host-by-discord
-  command_line /usr/lib/nagios/plugins/send-discord-host.sh
+  command_line /usr/lib/nagios/plugins/send-host.py "$NOTIFICATIONTYPE$" "$HOSTNAME$" "$HOSTSTATE$" "$HOSTADDRESS$" "$HOSTOUTPUT$" "$TIMET$"
 }
 
 define command {
   command_name notify-service-by-discord
-  command_line /usr/lib/nagios/plugins/send-discord-service.sh
+  command_line /usr/lib/nagios/plugins/send-service.py "$NOTIFICATIONTYPE$" "$SERVICEDESC$" "$HOSTNAME$" "$HOSTADDRESS$" "$SERVICESTATE$" "$TIMET$" "$SERVICEOUTPUT$"
 }
 ```
 
