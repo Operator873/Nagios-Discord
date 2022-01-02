@@ -24,8 +24,7 @@ def main(nagIn):
     data = {KEYS[i]: nagIn[i] for i in range(len(KEYS))}
 
     link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host'] + "&service=" + data['servdesc']
-    if data['hostaddr'] == "127.0.0.1":
-        data['hostaddr'] = "10.10.3.5"
+
     line1 = "**<" + data['type'] + ">** " + data['host'] + " - " + data['servdesc'] + ": " + data['servstate']
     line2 = data['hostaddr'] + " " + data['output']
 
