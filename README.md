@@ -1,5 +1,5 @@
 # Nagios-Discord
-This is a very simple Python script which will allow Nagios notifications to be announced on Discord.
+This is a very simple Python script which will allow Nagios notifications to be announced on Discord. You'll need a webhook on Discord already set up. Discord's guide for this is [here](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks). Be sure to update `HOOK` with your webhook URL as well as changing `your.website.com` to the appropriate domain at the top of each script.
 
 You'll need to make some modifications to your Nagios installation. The steps are quite easy.
 
