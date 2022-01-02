@@ -25,7 +25,7 @@ def main(nagIn):
 
     link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host']
 
-    line1 = "**<" + data['type'] + ">** " + data['hostname'] + "(" + host['hostaddr'] + ")  is " + data['hoststate']
+    line1 = "**<" + data['type'] + ">** " + data['hostname'] + "(" + data['hostaddr'] + ")  is " + data['hoststate']
 
     webhook = DiscordWebhook(url=HOOK)
     # create embed object for webhook
