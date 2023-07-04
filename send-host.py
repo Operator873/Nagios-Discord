@@ -3,9 +3,9 @@
 import sys
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
-HOOK = "https://discordapp.com/api/webhooks/id/token"
+HOOK = "https://discordapp.com/api/webhooks/id/token" # UPDATE WITH YOUR WEBHOOK
 KEYS = ['type', 'hostname', 'hoststate', 'hostaddr', 'output', 'time']
-DOMAIN = "your.website.com"
+DOMAIN = "your.website.com" # UPDATE WITH YOUR URL/DOMAIN
 
 
 def codecolor(alerttype):
@@ -22,12 +22,12 @@ def codecolor(alerttype):
 
 
 def main(nag_in):
-    cmd = nag_in.pop(0)
+    _cmd = nag_in.pop(0)
     data = {KEYS[i]: nag_in[i] for i in range(len(KEYS))}
 
-    link = "https://" + DOMAIN + "/nagios/cgi-bin/extinfo.cgi?type=2&host=" + data['host']
+    link = f"https://{DOMAIN}/nagios/cgi-bin/extinfo.cgi?type=2&host={data['host']}"
 
-    line1 = "**<" + data['type'] + ">** " + data['hostname'] + "(" + data['hostaddr'] + ")  is " + data['hoststate']
+    line1 = f"**<{data['type']}>** {data['hostname']} ({data['hostaddr']}) is {data['hoststate']}"
 
     webhook = DiscordWebhook(url=HOOK)
     # create embed object for webhook
@@ -40,7 +40,7 @@ def main(nag_in):
     # add embed object to webhook
     webhook.add_embed(embed)
 
-    res = webhook.execute()
+    webhook.execute()
 
-
-main(sys.argv)
+if __name__ == "__main__":
+    main(sys.argv)
