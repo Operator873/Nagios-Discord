@@ -26,8 +26,8 @@ def codecolor(alerttype):
 def main(nag_in):
     _cmd = nag_in.pop(0)
     data = {KEYS[i]: nag_in[i] for i in range(len(KEYS))}
-    host = urllib.parse(data["host"])
-    serv = urllib.parse(data["servdesc"])
+    host = urllib.parse.quote(data["host"])
+    serv = urllib.parse.quote(data["servdesc"])
 
     link = (
         f"https://{DOMAIN}/nagios/cgi-bin/extinfo.cgi?type=2&host={host}&service={serv}"
